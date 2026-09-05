@@ -40,6 +40,29 @@ const servicios = [
     }
 ];
 
+const preguntas = [
+    {
+        pregunta: '¿Puedo empezar si acabo de terminar el tratamiento?',
+        respuesta:
+            'Sí, es precisamente el momento para el que está pensado el programa: recuperar fuerza, rutina y energía una vez termina la fase más dura del tratamiento.'
+    },
+    {
+        pregunta: '¿Y si nunca he hecho ejercicio antes?',
+        respuesta:
+            'No pasa nada. El punto de partida es tu valoración inicial, no la de nadie más — el programa se adapta a ti, no al revés.'
+    },
+    {
+        pregunta: '¿Y si todavía no me siento con fuerzas?',
+        respuesta:
+            'Lo hablamos en la primera valoración. Ir a tu ritmo también significa poder empezar más despacio, o esperar un poco más si hace falta.'
+    },
+    {
+        pregunta: '¿Cuál es el primer paso?',
+        respuesta:
+            'Pedir tu primera valoración, por teléfono o WhatsApp. Es una conversación, no un compromiso — para ver juntos si esto es para ti.'
+    }
+];
+
 const whatsappHref =
     'https://wa.me/34613959332?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20una%20primera%20valoraci%C3%B3n%20para%20el%20programa%20de%20Salud%20Onco-Metab%C3%B3lica.';
 
@@ -191,6 +214,24 @@ const slideshow = [
             </div>
         </section>
 
+        <!-- Por qué el ejercicio importa -->
+        <section class="grid gap-10 sm:grid-cols-2 sm:gap-16">
+            <div>
+                <p class="eyebrow mb-4">Por qué</p>
+                <h2 class="mb-6">El ejercicio no es un extra, es parte del tratamiento.</h2>
+            </div>
+            <div class="flex flex-col gap-4 text-slate">
+                <p>
+                    Las principales guías clínicas de oncología recogen el ejercicio supervisado como un pilar más del tratamiento, no como un
+                    complemento aparte.
+                </p>
+                <p>
+                    Ayuda a conservar fuerza y masa muscular, a tolerar mejor las fases más duras y a recuperar antes la energía y la autonomía
+                    del día a día — siempre adaptado a tu momento y supervisado por profesionales sanitarios.
+                </p>
+            </div>
+        </section>
+
         <!-- Valores -->
         <section class="p-10 bg-linen rounded-md sm:p-16">
             <p class="eyebrow mb-4">Cómo trabajamos</p>
@@ -229,6 +270,25 @@ const slideshow = [
                             </div>
                             <p class="text-sm font-medium text-graphite">{especialidad}</p>
                         </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- Preguntas frecuentes -->
+        <section id="faq">
+            <p class="eyebrow mb-4">Dudas frecuentes</p>
+            <h2 class="max-w-2xl mb-10">Preguntas que nos hacen antes de empezar.</h2>
+            <div class="flex flex-col max-w-2xl gap-4">
+                {
+                    preguntas.map((item) => (
+                        <details class="pb-4 border-b border-pressed-cotton group">
+                            <summary class="flex items-center justify-between font-medium cursor-pointer list-none text-graphite marker:content-none">
+                                {item.pregunta}
+                                <span class="ml-4 text-gold group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
+                            </summary>
+                            <p class="mt-3 text-sm text-slate">{item.respuesta}</p>
+                        </details>
                     ))
                 }
             </div>
