@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Local dev-server launch config (machine-specific paths)
 .claude/
+
+# Deno lockfile generated locally by the Edge Functions emulator
+deno.lock
