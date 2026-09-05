@@ -1,9 +1,34 @@
 ---
-
+const year = new Date().getFullYear();
 ---
 
-<footer class="pt-16 pb-12 sm:pt-24 sm:pb-16">
-    <p class="text-sm">
-        <a href="https://docs.netlify.com/frameworks/astro/" class="decoration-dashed text-primary underline-offset-8"> Astro on Netlify </a>
-    </p>
+<footer id="contacto" class="pt-16 pb-12 border-t border-pressed-cotton sm:pt-24 sm:pb-16">
+    <div class="grid gap-10 sm:grid-cols-3">
+        <div>
+            <h3 class="mb-3 text-xl">Aurien Salud</h3>
+            <p class="text-sm text-slate">
+                Rúa do Concello, 12 Bajo<br />
+                32005 Ourense
+            </p>
+        </div>
+        <div>
+            <h3 class="mb-3 text-xl">Hablemos</h3>
+            <p class="text-sm text-slate">
+                <a href="tel:+34613959332" class="text-graphite">613 95 93 32</a><br />
+                <a href="mailto:info@auriensalud.com" class="text-graphite">info@auriensalud.com</a>
+            </p>
+        </div>
+        <div>
+            <h3 class="mb-3 text-xl">Escríbenos por WhatsApp</h3>
+            <a
+                href="https://wa.me/34613959332?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20una%20primera%20valoraci%C3%B3n%20para%20el%20programa%20de%20Salud%20Onco-Metab%C3%B3lica."
+                class="btn-ghost inline-flex"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Escribir por WhatsApp
+            </a>
+        </div>
+    </div>
+    <p class="pt-10 mt-10 text-sm border-t border-pressed-cotton text-dusk">© {year} Aurien Salud · Clínica Aurien Salud HBM SL</p>
 </footer>

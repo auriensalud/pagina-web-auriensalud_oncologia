@@ -1,19 +1,242 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import Markdown from '../components/Markdown.astro';
+import entrada from '../assets/entrada-aurien-salud.jpg';
+import valoracion from '../assets/valoracion-composicion-corporal.jpg';
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+const especialidades = ['Oncología', 'Fisioterapia', 'Psicología', 'Nutrición'];
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
+const equipo = [
+    {
+        nombre: 'Jacobo Abad',
+        rol: 'Oncología',
+        estado: 'confirmado'
+    },
+    {
+        nombre: 'María Bernárdez',
+        rol: 'Gerencia',
+        estado: 'confirmado'
+    },
+    {
+        nombre: 'Adrián Martín',
+        rol: 'Fisioterapia',
+        estado: 'confirmado'
+    },
+    {
+        nombre: 'Inés Viñas',
+        rol: 'Nutrición',
+        estado: 'confirmado'
+    },
+    {
+        nombre: 'Psicología',
+        rol: 'Por confirmar',
+        estado: 'pendiente'
+    }
+];
+
+const servicios = [
+    {
+        paso: '01',
+        titulo: 'Control',
+        descripcion:
+            'Valoración inicial multidisciplinar con oncología, fisioterapia, psicología y nutrición. Un punto de partida seguro: qué puedes y qué no puedes hacer ahora mismo, sin genéricos.'
+    },
+    {
+        paso: '02',
+        titulo: 'Cuidado',
+        descripcion:
+            'Programa de ejercicio guiado y acompañamiento continuo, ajustado a tu energía y a tu momento. A tu ritmo, nunca al de un grupo.'
+    },
+    {
+        paso: '03',
+        titulo: 'Prevención',
+        descripcion:
+            'Mantenimiento a largo plazo: recuperar tus rutinas, tu vida social y prevenir recaídas funcionales. El camino de vuelta a ser tú misma.'
+    }
+];
+
+const whatsappHref =
+    'https://wa.me/34613959332?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20una%20primera%20valoraci%C3%B3n%20para%20el%20programa%20de%20Salud%20Onco-Metab%C3%B3lica.';
 ---
 
-<Layout title="Welcome to Astro.">
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<Layout title="Salud Onco-Metabólica — Aurien Salud">
+    <div class="flex flex-col gap-24 sm:gap-32">
+        <!-- Franja horizontal bajo el menú: slideshow Ken Burns con las fotos reales validadas -->
+        <div class="relative w-full mt-2 overflow-hidden rounded-md aspect-21/9 sm:aspect-3/1 kenburns-slideshow">
+            <Image
+                src={entrada}
+                alt="Entrada de la clínica Aurien Salud en Ourense"
+                class="absolute inset-0 object-cover w-full h-full slide slide-1"
+                widths={[640, 1024, 1600]}
+                sizes="100vw"
+            />
+            <Image
+                src={valoracion}
+                alt="Valoración de composición corporal en Aurien Salud"
+                class="absolute inset-0 object-cover w-full h-full slide slide-2"
+                widths={[640, 1024, 1600]}
+                sizes="100vw"
+            />
+        </div>
+
+        <style>
+            .kenburns-slideshow .slide {
+                opacity: 0;
+                animation: kenburns-fade 12s infinite, kenburns-zoom 12s infinite;
+                animation-timing-function: ease-in-out;
+            }
+            .kenburns-slideshow .slide-1 {
+                animation-delay: 0s, 0s;
+            }
+            .kenburns-slideshow .slide-2 {
+                animation-delay: -6s, -6s;
+            }
+            @keyframes kenburns-fade {
+                0%, 42% { opacity: 1; }
+                50%, 92% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+            @keyframes kenburns-zoom {
+                0% { transform: scale(1); }
+                100% { transform: scale(1.08); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .kenburns-slideshow .slide {
+                    animation: none;
+                    opacity: 1;
+                }
+                .kenburns-slideshow .slide-2 {
+                    display: none;
+                }
+            }
+        </style>
+
+        <!-- Hero -->
+        <section>
+            <p class="eyebrow mb-4">Aurien Salud · Salud Onco-Metabólica</p>
+            <h1 class="max-w-3xl mb-6">Volver a sentirte tú misma, paso a paso.</h1>
+            <p class="max-w-xl mb-6 text-lg text-slate">
+                Un equipo de oncología, fisioterapia, psicología y nutrición, coordinado alrededor del ejercicio, para acompañarte a recuperar
+                tu rutina y tu vida después del tratamiento. A tu ritmo. No tienes que decidir esto sola.
+            </p>
+            <ul class="flex flex-wrap mb-8 gap-x-5 gap-y-1">
+                {
+                    especialidades.map((especialidad) => (
+                        <li class="eyebrow">{especialidad}</li>
+                    ))
+                }
+            </ul>
+            <div class="flex flex-wrap items-center gap-4">
+                <a href="#contacto" class="btn btn-lg">Pide tu primera valoración</a>
+                <a href={whatsappHref} class="btn-ghost" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- Quiénes somos -->
+        <section id="quienes-somos" class="grid gap-10 sm:grid-cols-2 sm:gap-16">
+            <div>
+                <p class="eyebrow mb-4">Quiénes somos</p>
+                <h2 class="mb-6">Una casa, no un gimnasio con extras.</h2>
+            </div>
+            <div class="flex flex-col gap-4 text-slate">
+                <p>
+                    Aurien Salud (Clínica Aurien Salud HBM SL) es una clínica multidisciplinar privada en Rúa do Concello 12, Ourense, con
+                    consultas propias y gimnasio de rehabilitación, en funcionamiento desde febrero de 2025.
+                </p>
+                <p>
+                    Nacimos centrados en rehabilitación cardíaca y cardiorrespiratoria. El programa de Salud Onco-Metabólica extiende el mismo
+                    modelo: recuperación funcional a través del ejercicio, con respaldo sanitario real detrás — no un gimnasio con extras.
+                </p>
+                <p class="text-graphite">
+                    María Bernárdez lleva la gerencia de Aurien Salud y es quien sostiene el día a día de esta casa.
+                    <span class="italic text-dusk">[Pendiente: una frase suya, en primera persona, sobre por qué existe este programa]</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Programa / Servicios -->
+        <section id="programa">
+            <p class="eyebrow mb-4">El programa</p>
+            <h2 class="max-w-2xl mb-4">Control, Cuidado y Prevención.</h2>
+            <p class="max-w-xl mb-12 text-lg text-slate">
+                La misma metodología que ya usamos en Recupera tu Corazón o Respira Mejor, adaptada a la recuperación metabólica y funcional tras
+                un tratamiento oncológico.
+            </p>
+            <div class="grid gap-8 sm:grid-cols-3 sm:gap-6">
+                {
+                    servicios.map((servicio) => (
+                        <div class="overflow-hidden bg-linen rounded-md">
+                            {servicio.titulo === 'Control' && (
+                                <Image src={valoracion} alt="Valoración de composición corporal en Aurien Salud" class="object-cover w-full h-40" widths={[400, 600]} sizes="400px" />
+                            )}
+                            <div class="p-8">
+                                <p class="mb-4 font-display text-3xl text-gold">{servicio.paso}</p>
+                                <h3 class="mb-3">{servicio.titulo}</h3>
+                                <p class="text-sm text-slate">{servicio.descripcion}</p>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- Valores -->
+        <section class="p-10 bg-linen rounded-md sm:p-16">
+            <p class="eyebrow mb-4">Cómo trabajamos</p>
+            <div class="grid gap-8 sm:grid-cols-2">
+                <div>
+                    <h3 class="mb-2">Casa, seguro, tranquilidad</h3>
+                    <p class="text-sm text-slate">Los mismos tres pilares de Aurien Salud, que aquí encajan mejor que en ningún otro programa.</p>
+                </div>
+                <div>
+                    <h3 class="mb-2">Acompañamiento real</h3>
+                    <p class="text-sm text-slate">No tienes que decidir esto sola. No prometemos victorias, prometemos estar cerca.</p>
+                </div>
+                <div>
+                    <h3 class="mb-2">Tu ritmo, no el de un grupo</h3>
+                    <p class="text-sm text-slate">Nadie se compara ni se exige al nivel de otra paciente.</p>
+                </div>
+                <div>
+                    <h3 class="mb-2">Seguridad clínica primero</h3>
+                    <p class="text-sm text-slate">Por delante de cualquier objetivo estético o de rendimiento.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equipo -->
+        <section id="equipo">
+            <p class="eyebrow mb-4">El equipo</p>
+            <h2 class="max-w-2xl mb-12">Caras y nombres, no solo un monitor.</h2>
+            <div class="grid grid-cols-2 gap-6 sm:grid-cols-5">
+                {
+                    equipo.map((persona) => (
+                        <div class="text-center">
+                            <div
+                                class:list={[
+                                    'flex items-center justify-center mb-3 aspect-square rounded-full',
+                                    persona.estado === 'pendiente' ? 'bg-pressed-cotton' : 'bg-gold/20'
+                                ]}
+                            >
+                                <span class="font-display text-2xl text-gold">
+                                    {persona.estado === 'pendiente' ? '?' : persona.nombre.charAt(0)}
+                                </span>
+                            </div>
+                            <p class="text-sm font-medium text-graphite">{persona.nombre}</p>
+                            <p class:list={['text-xs', persona.estado === 'pendiente' ? 'italic text-dusk' : 'text-slate']}>{persona.rol}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- CTA final -->
+        <section class="p-10 text-center bg-graphite rounded-md sm:p-20">
+            <h2 class="max-w-lg mx-auto mb-4 text-parchment">No tienes que decidir esto sola.</h2>
+            <p class="max-w-md mx-auto mb-8 text-lg text-pressed-cotton">Hablemos primero.</p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="tel:+34613959332" class="btn btn-lg">613 95 93 32</a>
+                <a href={whatsappHref} class="btn-ghost" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
+            </div>
+        </section>
+    </div>
 </Layout>

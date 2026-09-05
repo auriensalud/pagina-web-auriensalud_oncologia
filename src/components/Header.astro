@@ -2,29 +2,29 @@
 import Logo from '../components/Logo.astro';
 
 const navItems = [
-    { linkText: 'Home', href: '/' },
-    { linkText: 'Revalidation', href: '/revalidation' },
-    { linkText: 'Image CDN', href: '/image-cdn' },
-    { linkText: 'Edge Function', href: '/edge' },
-    { linkText: 'Blobs', href: '/blobs' }
+    { linkText: 'Quiénes somos', href: '#quienes-somos' },
+    { linkText: 'Programa', href: '#programa' },
+    { linkText: 'Equipo', href: '#equipo' },
+    { linkText: 'Contacto', href: '#contacto' }
 ];
 ---
 
-<nav class="flex flex-wrap items-center gap-4 pt-6 pb-16 sm:pt-12 sm:pb-24">
-    <a href="/">
+<nav class="flex flex-wrap items-center justify-between gap-4 py-6 sm:py-8">
+    <a href="/" class="shrink-0">
         <Logo />
     </a>
-    {
-        !!navItems?.length && (
-            <ul class="flex flex-wrap gap-x-4 gap-y-1">
-                {navItems.map((item) => (
-                    <li>
-                        <a href={item.href} class="inline-block px-1.5 py-1 sm:px-3 sm:py-2">
-                            {item.linkText}
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        )
-    }
+    <ul class="flex flex-wrap items-center gap-x-1 gap-y-1 sm:gap-x-2">
+        {
+            navItems.map((item) => (
+                <li>
+                    <a href={item.href} class="inline-block px-2 py-1 no-underline sm:px-3 sm:py-2 text-sm text-graphite hover:text-gold transition-colors">
+                        {item.linkText}
+                    </a>
+                </li>
+            ))
+        }
+        <li>
+            <a href="tel:+34613959332" class="btn ml-2">613 95 93 32</a>
+        </li>
+    </ul>
 </nav>

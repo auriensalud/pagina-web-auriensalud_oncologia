@@ -1,10 +1,51 @@
 @import 'tailwindcss';
 
+/* Redaction — fuente de titulares propia de Aurien Salud (autoalojada,
+   descargada desde auriensalud.com/wp-content/uploads/useanyfont/) */
+@font-face {
+    font-family: 'Redaction';
+    src: url('../assets/fonts/Redaction.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+ * Design system extraído de la web real de Aurien Salud (auriensalud.com):
+ * fondo crema cálido, acento dorado/bronce como único color de marca,
+ * titulares en Redaction (fuente propia, autoalojada) y cuerpo en Montserrat.
+ * Se conserva la estructura editorial (tracking ajustado, botones planos,
+ * radios contenidos) de la iteración anterior, pero con los tokens reales
+ * de marca en vez de la paleta de referencia.
+ */
 @theme {
-    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --color-primary: #f67280;
-    --color-primary-content: #101828;
-    --color-complementary: #355c7d;
+    /* Fuentes */
+    --font-sans: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Redaction', Georgia, 'Times New Roman', serif;
+
+    /* Paleta de marca (auriensalud.com) */
+    --color-parchment: #f4ede4; /* fondo de página — crema real de Aurien */
+    --color-linen: #efe6d8; /* fondo de sección alterna */
+    --color-pressed-cotton: #e3d6c0; /* superficie de tarjeta / terciaria */
+    --color-graphite: #1c1b18; /* texto principal (suavizado del negro puro del sitio) */
+    --color-slate: #55524a; /* texto secundario */
+    --color-dusk: #726b5c; /* texto terciario, pies de foto */
+    --color-gold: #b39a63; /* acento de marca — logo, CTAs, títulos destacados */
+    --color-gold-dark: #8c7748; /* estado hover del dorado */
+    --color-ink: #000000;
+
+    /* Alias heredados para que las clases utilitarias existentes
+       (bg-primary, etc.) sigan funcionando, ahora con la marca real */
+    --color-primary: var(--color-gold);
+    --color-primary-content: var(--color-graphite);
+    --color-complementary: var(--color-linen);
+
+    /* Tracking editorial ajustado */
+    --tracking-display: -0.03em;
+    --tracking-heading: -0.02em;
+    --tracking-body: -0.01em;
+    --tracking-caption: 0.05em;
+
     --background-image-noise: linear-gradient(
             to bottom,
             color-mix(in oklab, var(--color-gray-950) 0%, transparent),
@@ -14,12 +55,30 @@
 }
 
 @layer base {
+    body {
+        @apply bg-parchment text-graphite;
+    }
+
+    h1,
+    h2,
+    h3 {
+        @apply font-display font-normal tracking-[var(--tracking-heading)];
+    }
+
     h1 {
-        @apply text-4xl font-bold tracking-tight sm:text-5xl;
+        @apply text-5xl leading-none tracking-[var(--tracking-display)] sm:text-6xl;
     }
 
     h2 {
-        @apply text-2xl font-bold sm:text-3xl;
+        @apply text-4xl leading-tight sm:text-5xl;
+    }
+
+    h3 {
+        @apply text-2xl leading-tight;
+    }
+
+    p {
+        @apply leading-snug tracking-[var(--tracking-body)] text-slate;
     }
 
     a:not(.btn) {
@@ -27,11 +86,11 @@
     }
 
     pre {
-        @apply p-6 overflow-x-auto rounded-lg;
+        @apply p-6 overflow-x-auto rounded-md;
     }
 
     :not(pre) > code {
-        @apply px-1 py-0.5 font-mono rounded bg-gray-900 text-primary;
+        @apply px-1 py-0.5 font-mono rounded bg-graphite text-parchment;
         font-size: 0.9em;
     }
 }
@@ -55,18 +114,19 @@
         }
     }
 
+    /* Botón plano, sin sombras, radio contenido */
     .btn {
-        @apply inline-flex items-center justify-center gap-2 bg-primary text-primary-content cursor-pointer text-center font-semibold no-underline transition-colors;
+        @apply inline-flex items-center justify-center gap-2 bg-gold text-graphite cursor-pointer text-center font-sans font-medium tracking-[var(--tracking-body)] no-underline transition-colors;
         padding: var(--btn-py, 0.875rem) var(--btn-px, 1.25rem);
         font-size: var(--btn-font-size, 0.875rem);
-        border-radius: var(--btn-border-radius, 0.25rem);
+        border-radius: var(--btn-border-radius, 0.375rem);
 
         &:hover {
-            @apply bg-primary/85;
+            @apply bg-gold-dark text-white;
         }
 
         &:disabled {
-            @apply text-gray-400 bg-gray-700;
+            @apply text-slate bg-pressed-cotton;
         }
     }
 
@@ -74,5 +134,22 @@
         --btn-font-size: 1.125rem;
         --btn-px: 1.5rem;
         --btn-py: 1.125rem;
+    }
+
+    /* Botón secundario "ghost" con borde dorado */
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 bg-transparent text-gold border border-gold cursor-pointer text-center font-sans font-medium tracking-[var(--tracking-body)] no-underline transition-colors;
+        padding: 0.25rem 1.125rem;
+        border-radius: 0.375rem;
+
+        &:hover {
+            @apply bg-gold text-graphite;
+        }
+    }
+
+    /* Etiqueta pequeña en versalitas, estilo "Cita previa" del nav de Aurien */
+    .eyebrow {
+        @apply font-sans text-sm uppercase text-gold;
+        letter-spacing: var(--tracking-caption);
     }
 }

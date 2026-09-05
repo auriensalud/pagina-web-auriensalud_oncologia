@@ -11,7 +11,12 @@ export default defineConfig({
     integrations: [react()],
     adapter: netlify({
         devFeatures: {
-            environmentVariables: true
+            environmentVariables: true,
+            // Deshabilitado: el sandbox de este entorno no logra conectar con el
+            // servidor Deno local que emula las Edge Functions, y astro dev se
+            // queda colgado esperando la conexión. La edge function sigue
+            // funcionando normalmente al desplegar en Netlify.
+            edgeFunctions: false
         }
     })
 });
