@@ -3,11 +3,12 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import entrada from '../assets/entrada-aurien-salud.jpg';
 import pasillo from '../assets/pasillo-aurien-salud.jpg';
+import terapeutaLuis from '../assets/terapeuta-luis.jpg';
 import consulta from '../assets/consulta-aurien-salud.jpg';
 import logoPared from '../assets/logo-pared-aurien.jpg';
 import valoracion from '../assets/valoracion-composicion-corporal.jpg';
 
-const especialidades = ['Oncología', 'Fisioterapia', 'Psicología', 'Nutrición'];
+const especialidades = ['Oncología', 'Fisioterapia', 'Nutrición', 'Psicología'];
 
 const equipo = [
     {
@@ -60,68 +61,72 @@ const servicios = [
 
 const whatsappHref =
     'https://wa.me/34613959332?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20una%20primera%20valoraci%C3%B3n%20para%20el%20programa%20de%20Salud%20Onco-Metab%C3%B3lica.';
+
+const slideshow = [
+    { src: entrada, alt: 'Entrada de la clínica Aurien Salud en Ourense', position: '50% 50%' },
+    { src: pasillo, alt: 'Pasillo y sala de espera de la clínica Aurien Salud', position: '50% 50%' },
+    {
+        src: terapeutaLuis,
+        alt: 'Terapeuta atendiendo a un paciente en Aurien Salud, paciente autorizó el uso de esta foto',
+        position: '50% 10%'
+    },
+    { src: consulta, alt: 'Consulta en Aurien Salud, paciente autorizó el uso de esta foto', position: '50% 22%' },
+    { src: logoPared, alt: 'Logotipo de Aurien Salud en la pared de la clínica', position: '50% 50%' }
+];
 ---
 
 <Layout title="Salud Onco-Metabólica — Aurien Salud">
     <div class="flex flex-col gap-24 sm:gap-32">
-        <!-- Franja horizontal bajo el menú: slideshow Ken Burns con las fotos reales validadas -->
-        <div class="relative w-full mt-2 overflow-hidden rounded-md aspect-21/9 sm:aspect-3/1 kenburns-slideshow">
-            <Image
-                src={entrada}
-                alt="Entrada de la clínica Aurien Salud en Ourense"
-                class="absolute inset-0 object-cover w-full h-full slide slide-1"
-                widths={[640, 1024, 1600]}
-                sizes="100vw"
-            />
-            <Image
-                src={pasillo}
-                alt="Pasillo y sala de espera de la clínica Aurien Salud"
-                class="absolute inset-0 object-cover w-full h-full slide slide-2"
-                widths={[640, 1024, 1600]}
-                sizes="100vw"
-            />
-            <Image
-                src={consulta}
-                alt="Consulta en Aurien Salud, paciente autorizó el uso de esta foto"
-                class="absolute inset-0 object-cover w-full h-full slide slide-3"
-                widths={[640, 1024, 1600]}
-                sizes="100vw"
-            />
-            <Image
-                src={logoPared}
-                alt="Logotipo de Aurien Salud en la pared de la clínica"
-                class="absolute inset-0 object-cover w-full h-full slide slide-4"
-                widths={[640, 1024, 1600]}
-                sizes="100vw"
-            />
+        <!-- Franja horizontal a pantalla completa bajo el menú: slideshow con fondo desenfocado
+             (para rellenar la caja) + la foto completa sin recortar encima, para no perder nada
+             de imagen sea cual sea su forma (la mayoría de las fotos reales son verticales). -->
+        <div class="relative overflow-hidden full-bleed aspect-3/2 sm:aspect-2/1 kenburns-slideshow">
+            {
+                slideshow.map((photo, i) => (
+                    <div class:list={['absolute inset-0 slide', `slide-${i + 1}`]}>
+                        <Image
+                            src={photo.src}
+                            alt={photo.alt}
+                            class="absolute inset-0 object-cover w-full h-full"
+                            style={{ objectPosition: photo.position }}
+                            widths={[640, 1024, 1920]}
+                            sizes="100vw"
+                        />
+                    </div>
+                ))
+            }
         </div>
 
         <style>
+            .full-bleed {
+                width: 100vw;
+                left: 50%;
+                margin-left: -50vw;
+            }
             .kenburns-slideshow .slide {
                 opacity: 0;
-                animation: kenburns-fade 24s infinite, kenburns-zoom 24s infinite;
+                animation: kenburns-fade 40s infinite;
                 animation-timing-function: ease-in-out;
             }
             .kenburns-slideshow .slide-1 {
-                animation-delay: 0s, 0s;
+                animation-delay: 0s;
             }
             .kenburns-slideshow .slide-2 {
-                animation-delay: -6s, -6s;
+                animation-delay: -8s;
             }
             .kenburns-slideshow .slide-3 {
-                animation-delay: -12s, -12s;
+                animation-delay: -16s;
             }
             .kenburns-slideshow .slide-4 {
-                animation-delay: -18s, -18s;
+                animation-delay: -24s;
+            }
+            .kenburns-slideshow .slide-5 {
+                animation-delay: -32s;
             }
             @keyframes kenburns-fade {
-                0%, 21% { opacity: 1; }
-                25%, 96% { opacity: 0; }
+                0%, 17% { opacity: 1; }
+                20%, 97% { opacity: 0; }
                 100% { opacity: 1; }
-            }
-            @keyframes kenburns-zoom {
-                0% { transform: scale(1); }
-                100% { transform: scale(1.08); }
             }
             @media (prefers-reduced-motion: reduce) {
                 .kenburns-slideshow .slide {
@@ -130,7 +135,8 @@ const whatsappHref =
                 }
                 .kenburns-slideshow .slide-2,
                 .kenburns-slideshow .slide-3,
-                .kenburns-slideshow .slide-4 {
+                .kenburns-slideshow .slide-4,
+                .kenburns-slideshow .slide-5 {
                     display: none;
                 }
             }
@@ -138,15 +144,22 @@ const whatsappHref =
 
         <!-- Hero -->
         <section>
-            <p class="eyebrow mb-4">Aurien Salud · Salud Onco-Metabólica</p>
-            <h1 class="max-w-3xl mb-6">Especialistas en recuperar tu mejor versión.</h1>
-            <ul class="flex flex-wrap mb-8 gap-x-5 gap-y-1">
-                {
-                    especialidades.map((especialidad) => (
-                        <li class="eyebrow">{especialidad}</li>
-                    ))
-                }
-            </ul>
+            <h1 class="max-w-3xl mb-6">¿Quieres recuperar tu mejor versión?</h1>
+            <details class="mb-8 group">
+                <summary class="inline-block cursor-pointer eyebrow list-none marker:content-none">
+                    ¿Esto te interesa?
+                </summary>
+                <div class="mt-4">
+                    <p class="mb-2 font-display text-2xl">Atención oncológica integral</p>
+                    <ul class="flex flex-wrap gap-x-5 gap-y-1">
+                        {
+                            especialidades.map((especialidad) => (
+                                <li class="text-sm text-slate">{especialidad}</li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            </details>
             <div class="flex flex-wrap items-center gap-4">
                 <a href="#contacto" class="btn btn-lg">Pide tu primera valoración</a>
                 <a href={whatsappHref} class="btn-ghost" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
