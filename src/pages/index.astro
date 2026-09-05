@@ -125,14 +125,12 @@ const slideshow = [
 
         <!-- Hero -->
         <section>
-            <h1 class="max-w-3xl mb-6">¿Quieres recuperar tu mejor versión?</h1>
-            <details class="mb-8 group">
-                <summary class="inline-block cursor-pointer eyebrow list-none marker:content-none">
-                    ¿Esto te interesa?
-                </summary>
-                <div class="mt-4">
+            <h1 class="max-w-3xl mb-6">Quieres recuperar tu mejor versión</h1>
+            <details class="flex flex-col items-center mb-8 group">
+                <summary class="btn list-none marker:content-none">Esto te interesa</summary>
+                <div class="mt-4 text-center">
                     <p class="mb-2 font-display text-2xl">Atención oncológica integral</p>
-                    <ul class="flex flex-wrap gap-x-5 gap-y-1">
+                    <ul class="flex flex-wrap justify-center gap-x-5 gap-y-1">
                         {
                             especialidades.map((especialidad) => (
                                 <li class="text-sm text-slate">{especialidad}</li>
