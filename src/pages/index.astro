@@ -2,6 +2,9 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import entrada from '../assets/entrada-aurien-salud.jpg';
+import pasillo from '../assets/pasillo-aurien-salud.jpg';
+import consulta from '../assets/consulta-aurien-salud.jpg';
+import logoPared from '../assets/logo-pared-aurien.jpg';
 import valoracion from '../assets/valoracion-composicion-corporal.jpg';
 
 const especialidades = ['Oncología', 'Fisioterapia', 'Psicología', 'Nutrición'];
@@ -71,9 +74,23 @@ const whatsappHref =
                 sizes="100vw"
             />
             <Image
-                src={valoracion}
-                alt="Valoración de composición corporal en Aurien Salud"
+                src={pasillo}
+                alt="Pasillo y sala de espera de la clínica Aurien Salud"
                 class="absolute inset-0 object-cover w-full h-full slide slide-2"
+                widths={[640, 1024, 1600]}
+                sizes="100vw"
+            />
+            <Image
+                src={consulta}
+                alt="Consulta en Aurien Salud, paciente autorizó el uso de esta foto"
+                class="absolute inset-0 object-cover w-full h-full slide slide-3"
+                widths={[640, 1024, 1600]}
+                sizes="100vw"
+            />
+            <Image
+                src={logoPared}
+                alt="Logotipo de Aurien Salud en la pared de la clínica"
+                class="absolute inset-0 object-cover w-full h-full slide slide-4"
                 widths={[640, 1024, 1600]}
                 sizes="100vw"
             />
@@ -82,7 +99,7 @@ const whatsappHref =
         <style>
             .kenburns-slideshow .slide {
                 opacity: 0;
-                animation: kenburns-fade 12s infinite, kenburns-zoom 12s infinite;
+                animation: kenburns-fade 24s infinite, kenburns-zoom 24s infinite;
                 animation-timing-function: ease-in-out;
             }
             .kenburns-slideshow .slide-1 {
@@ -91,9 +108,15 @@ const whatsappHref =
             .kenburns-slideshow .slide-2 {
                 animation-delay: -6s, -6s;
             }
+            .kenburns-slideshow .slide-3 {
+                animation-delay: -12s, -12s;
+            }
+            .kenburns-slideshow .slide-4 {
+                animation-delay: -18s, -18s;
+            }
             @keyframes kenburns-fade {
-                0%, 42% { opacity: 1; }
-                50%, 92% { opacity: 0; }
+                0%, 21% { opacity: 1; }
+                25%, 96% { opacity: 0; }
                 100% { opacity: 1; }
             }
             @keyframes kenburns-zoom {
@@ -105,7 +128,9 @@ const whatsappHref =
                     animation: none;
                     opacity: 1;
                 }
-                .kenburns-slideshow .slide-2 {
+                .kenburns-slideshow .slide-2,
+                .kenburns-slideshow .slide-3,
+                .kenburns-slideshow .slide-4 {
                     display: none;
                 }
             }
@@ -114,11 +139,7 @@ const whatsappHref =
         <!-- Hero -->
         <section>
             <p class="eyebrow mb-4">Aurien Salud · Salud Onco-Metabólica</p>
-            <h1 class="max-w-3xl mb-6">Volver a sentirte tú misma, paso a paso.</h1>
-            <p class="max-w-xl mb-6 text-lg text-slate">
-                Un equipo de oncología, fisioterapia, psicología y nutrición, coordinado alrededor del ejercicio, para acompañarte a recuperar
-                tu rutina y tu vida después del tratamiento. A tu ritmo. No tienes que decidir esto sola.
-            </p>
+            <h1 class="max-w-3xl mb-6">Especialistas en recuperar tu mejor versión.</h1>
             <ul class="flex flex-wrap mb-8 gap-x-5 gap-y-1">
                 {
                     especialidades.map((especialidad) => (
