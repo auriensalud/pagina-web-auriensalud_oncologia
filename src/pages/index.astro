@@ -10,33 +10,14 @@ import valoracion from '../assets/valoracion-composicion-corporal.jpg';
 
 const especialidades = ['Oncología', 'Fisioterapia', 'Nutrición', 'Psicología'];
 
-const equipo = [
-    {
-        nombre: 'Jacobo Abad',
-        rol: 'Oncología',
-        estado: 'confirmado'
-    },
-    {
-        nombre: 'María Bernárdez',
-        rol: 'Gerencia',
-        estado: 'confirmado'
-    },
-    {
-        nombre: 'Adrián Martín',
-        rol: 'Fisioterapia',
-        estado: 'confirmado'
-    },
-    {
-        nombre: 'Inés Viñas',
-        rol: 'Nutrición',
-        estado: 'confirmado'
-    },
-    {
-        nombre: 'Psicología',
-        rol: 'Por confirmar',
-        estado: 'pendiente'
-    }
-];
+// Un icono de línea sencillo por especialidad — sin nombres de profesionales.
+const especialidadIconos: Record<string, string> = {
+    Oncología:
+        'M12 3c-1.2 2-1.2 4 0 6M9 9c-3 1-5 3-5 6a8 8 0 0 0 16 0c0-3-2-5-5-6M12 9v12',
+    Fisioterapia: 'M12 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM7 21l3-7 2-3 2 3 3 7M9 14l-3-2M15 14l3-2',
+    Nutrición: 'M12 3c4 0 7 3 7 7 0 6-4 11-7 11S5 16 5 10c0-4 3-7 7-7ZM12 3c0 3-1 5-3 6',
+    Psicología: 'M9 3a5 5 0 0 0-5 5c0 2 1 3 1 5 0 2-1 3-1 5a2 2 0 0 0 2 2h1v-3M9 3a5 5 0 0 1 5 5c0 1-.5 2-1 3M14 8h4M13 12h4'
+};
 
 const servicios = [
     {
@@ -182,8 +163,7 @@ const slideshow = [
                     modelo: recuperación funcional a través del ejercicio, con respaldo sanitario real detrás — no un gimnasio con extras.
                 </p>
                 <p class="text-graphite">
-                    María Bernárdez lleva la gerencia de Aurien Salud y es quien sostiene el día a día de esta casa.
-                    <span class="italic text-dusk">[Pendiente: una frase suya, en primera persona, sobre por qué existe este programa]</span>
+                    Un equipo que sostiene el día a día de esta casa, con el mismo compromiso en cada especialidad.
                 </p>
             </div>
         </section>
@@ -237,26 +217,20 @@ const slideshow = [
             </div>
         </section>
 
-        <!-- Equipo -->
+        <!-- Especialidades -->
         <section id="equipo">
-            <p class="eyebrow mb-4">El equipo</p>
-            <h2 class="max-w-2xl mb-12">Caras y nombres, no solo un monitor.</h2>
-            <div class="grid grid-cols-2 gap-6 sm:grid-cols-5">
+            <p class="eyebrow mb-4">Especialidades</p>
+            <h2 class="max-w-2xl mb-12">Un equipo, cuatro especialidades, un mismo objetivo.</h2>
+            <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
                 {
-                    equipo.map((persona) => (
+                    especialidades.map((especialidad) => (
                         <div class="text-center">
-                            <div
-                                class:list={[
-                                    'flex items-center justify-center mb-3 aspect-square rounded-full',
-                                    persona.estado === 'pendiente' ? 'bg-pressed-cotton' : 'bg-gold/20'
-                                ]}
-                            >
-                                <span class="font-display text-2xl text-gold">
-                                    {persona.estado === 'pendiente' ? '?' : persona.nombre.charAt(0)}
-                                </span>
+                            <div class="flex items-center justify-center mb-3 aspect-square rounded-full bg-gold/20">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-gold">
+                                    <path d={especialidadIconos[especialidad]} />
+                                </svg>
                             </div>
-                            <p class="text-sm font-medium text-graphite">{persona.nombre}</p>
-                            <p class:list={['text-xs', persona.estado === 'pendiente' ? 'italic text-dusk' : 'text-slate']}>{persona.rol}</p>
+                            <p class="text-sm font-medium text-graphite">{especialidad}</p>
                         </div>
                     ))
                 }
