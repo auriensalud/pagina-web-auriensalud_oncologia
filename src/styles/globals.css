@@ -136,11 +136,21 @@
         --btn-py: 1.125rem;
     }
 
-    /* Botón secundario "ghost" con borde dorado */
+    /* Tamaño intermedio: un punto más grande que el botón base, usado para
+       igualar "Esto te interesa" con las llamadas a la acción del hero */
+    .btn-md {
+        --btn-font-size: 1rem;
+        --btn-px: 1.375rem;
+        --btn-py: 1rem;
+    }
+
+    /* Botón secundario "ghost" con borde dorado — mismas variables de tamaño
+       que .btn, para que btn-lg afecte a ambos por igual */
     .btn-ghost {
         @apply inline-flex items-center justify-center gap-2 bg-transparent text-gold border border-gold cursor-pointer text-center font-sans font-medium tracking-[var(--tracking-body)] no-underline transition-colors;
-        padding: 0.25rem 1.125rem;
-        border-radius: 0.375rem;
+        padding: var(--btn-py, 0.875rem) var(--btn-px, 1.25rem);
+        font-size: var(--btn-font-size, 0.875rem);
+        border-radius: var(--btn-border-radius, 0.375rem);
 
         &:hover {
             @apply bg-gold text-graphite;
