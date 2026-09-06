@@ -121,7 +121,11 @@ const slideshow = [
                     ))
                 }
             </div>
-            <p class="inline-block px-6 py-3 mb-6 font-display text-3xl text-gold bg-linen rounded-full sm:text-4xl">Tu recuperación continúa.</p>
+            <div class="relative inline-block mb-6 bg-linen rounded-full badge-carousel">
+                <p class="px-6 py-3 font-display text-3xl invisible sm:text-4xl" aria-hidden="true">Tu recuperación continúa.</p>
+                <p class="absolute inset-0 flex items-center justify-center px-6 font-display text-3xl text-gold sm:text-4xl badge-slide badge-slide-1">Sí puedes.</p>
+                <p class="absolute inset-0 flex items-center justify-center px-6 font-display text-3xl text-gold sm:text-4xl badge-slide badge-slide-2">Tu recuperación continúa.</p>
+            </div>
             <p class="inline-block px-4 py-2 mb-6 text-xs eyebrow bg-linen rounded-2xl sm:text-sm">
                 Primer centro sanitario en ejercicio oncológico en Ourense
             </p>
@@ -307,6 +311,39 @@ const slideshow = [
                 animation: none;
                 opacity: 1;
                 margin-bottom: 0.75rem;
+            }
+        }
+
+        /* Recuadro dorado bajo las preguntas: "Sí puedes." se desvanece
+           para dar paso a "Tu recuperación continúa.", en el mismo ciclo
+           de 12s que el carrusel de preguntas de arriba. */
+        .badge-slide {
+            opacity: 0;
+            animation: badge-fade 12s infinite;
+            animation-timing-function: ease-in-out;
+        }
+        .badge-slide-1 {
+            animation-delay: 0s;
+        }
+        .badge-slide-2 {
+            animation-delay: -6s;
+        }
+        @keyframes badge-fade {
+            0%, 42% { opacity: 1; }
+            50%, 92% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .badge-slide {
+                position: static;
+                animation: none;
+                opacity: 1;
+            }
+            .badge-carousel p.invisible {
+                display: none;
+            }
+            .badge-slide-1 {
+                display: none;
             }
         }
 
