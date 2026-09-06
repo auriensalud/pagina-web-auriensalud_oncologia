@@ -114,12 +114,12 @@
         }
     }
 
-    /* Botón plano, sin sombras, radio contenido */
+    /* Botón sin sombras, ahora en forma de píldora (radio completo) */
     .btn {
         @apply inline-flex items-center justify-center gap-2 bg-gold text-graphite cursor-pointer text-center font-sans font-medium tracking-[var(--tracking-body)] no-underline transition-colors;
         padding: var(--btn-py, 0.875rem) var(--btn-px, 1.25rem);
         font-size: var(--btn-font-size, 0.875rem);
-        border-radius: var(--btn-border-radius, 0.375rem);
+        border-radius: var(--btn-border-radius, 9999px);
 
         &:hover {
             @apply bg-gold-dark text-white;
@@ -150,7 +150,7 @@
         @apply inline-flex items-center justify-center gap-2 bg-transparent text-gold border border-gold cursor-pointer text-center font-sans font-medium tracking-[var(--tracking-body)] no-underline transition-colors;
         padding: var(--btn-py, 0.875rem) var(--btn-px, 1.25rem);
         font-size: var(--btn-font-size, 0.875rem);
-        border-radius: var(--btn-border-radius, 0.375rem);
+        border-radius: var(--btn-border-radius, 9999px);
 
         &:hover {
             @apply bg-gold text-graphite;
