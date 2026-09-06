@@ -53,29 +53,29 @@ const slideshow = [
              reales: entrada, pasillo, acompañamiento, logo). CTA visible
              sin hacer scroll.
         ============================================================= -->
-        <div class="flex flex-col gap-3">
-            <div class="relative overflow-hidden full-bleed aspect-3/2 sm:aspect-2/1 kenburns-slideshow">
-                {
-                    slideshow.map((photo, i) => (
-                        <div class:list={['absolute inset-0 slide', `slide-${i + 1}`]}>
-                            <Image
-                                src={photo.src}
-                                alt={photo.alt}
-                                class="absolute inset-0 object-cover w-full h-full"
-                                style={{ objectPosition: photo.position }}
-                                widths={[640, 1024, 1920]}
-                                sizes="100vw"
-                            />
-                        </div>
-                    ))
-                }
-            </div>
-            <p class="text-sm text-center eyebrow">Primer centro sanitario en ejercicio oncológico en Ourense</p>
+        <div class="relative overflow-hidden full-bleed aspect-3/2 sm:aspect-2/1 kenburns-slideshow">
+            {
+                slideshow.map((photo, i) => (
+                    <div class:list={['absolute inset-0 slide', `slide-${i + 1}`]}>
+                        <Image
+                            src={photo.src}
+                            alt={photo.alt}
+                            class="absolute inset-0 object-cover w-full h-full"
+                            style={{ objectPosition: photo.position }}
+                            widths={[640, 1024, 1920]}
+                            sizes="100vw"
+                        />
+                    </div>
+                ))
+            }
         </div>
 
         <section>
             <h1 class="mb-2">El tratamiento termina.</h1>
-            <p class="mb-6 font-display text-4xl text-gold sm:text-5xl">Tu recuperación continúa.</p>
+            <p class="mb-4 font-display text-4xl text-gold sm:text-5xl">Tu recuperación continúa.</p>
+            <p class="inline-block px-4 py-2 mb-6 text-xs text-center eyebrow bg-linen rounded-2xl sm:text-sm">
+                Primer centro sanitario en ejercicio oncológico en Ourense
+            </p>
             <p class="max-w-xl mb-6 text-lg text-slate">
                 Te ayudamos a recuperar <strong class="font-semibold text-graphite">fuerza, confianza y autonomía</strong> para volver a una
                 vida activa.
@@ -89,18 +89,16 @@ const slideshow = [
              Sin fotografía, tipografía grande, mucho espacio en blanco.
         ============================================================= -->
         <section id="ahora-que" class="max-w-3xl">
+            <p class="mb-2 eyebrow">El tratamiento termina...</p>
             <h2 class="mb-10">¿Y ahora qué?</h2>
-            <div class="relative min-h-[220px] mb-12 sm:min-h-[180px] qa-carousel">
+            <div class="relative min-h-[140px] mb-12 sm:min-h-[110px] qa-carousel">
                 {
                     preguntasCarrusel.map((pregunta, i) => (
                         <p class:list={['absolute inset-0 font-display text-3xl text-graphite sm:text-4xl qa-slide', `qa-slide-${i + 1}`]}>{pregunta}</p>
                     ))
                 }
-                <div class:list={['absolute inset-0 qa-slide', `qa-slide-${preguntasCarrusel.length + 1}`]}>
-                    <p class="font-display text-3xl text-graphite sm:text-4xl">El tratamiento termina.</p>
-                    <p class="font-display text-3xl text-gold sm:text-4xl">La recuperación continúa.</p>
-                </div>
             </div>
+            <p class="mb-2 text-sm eyebrow">La solución</p>
             <p class="text-lg text-slate">
                 No es un gimnasio.<br />
                 Es un espacio sanitario donde aprender a <strong class="font-semibold text-graphite">volver a moverte con seguridad</strong>.
@@ -242,10 +240,10 @@ const slideshow = [
         }
 
         /* Carrusel de texto de "¿Y ahora qué?": las preguntas se van
-           encadenando y termina enlazando con el titular del hero. */
+           encadenando antes de dar paso a la solución. */
         .qa-slide {
             opacity: 0;
-            animation: qa-fade 16s infinite;
+            animation: qa-fade 12s infinite;
             animation-timing-function: ease-in-out;
         }
         .qa-slide-1 {
@@ -256,9 +254,6 @@ const slideshow = [
         }
         .qa-slide-3 {
             animation-delay: -8s;
-        }
-        .qa-slide-4 {
-            animation-delay: -12s;
         }
         @keyframes qa-fade {
             0%, 21% { opacity: 1; }
