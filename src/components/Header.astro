@@ -11,40 +11,44 @@ const whatsappHref =
     'https://wa.me/34613959332?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20una%20primera%20valoraci%C3%B3n%20para%20el%20programa%20de%20Salud%20Onco-Metab%C3%B3lica.';
 ---
 
-<nav class="sticky top-0 z-40 flex flex-wrap items-center justify-between gap-4 py-5 border-b bg-parchment/95 backdrop-blur-sm border-pressed-cotton sm:py-6">
-    <a href="/" class="shrink-0">
-        <Logo />
-    </a>
-    <ul class="flex flex-wrap items-center gap-x-1 gap-y-1 sm:gap-x-2">
-        {
-            navItems.map((item) => (
+<nav class="sticky top-0 z-40">
+    <div class="relative border-b full-bleed bg-parchment/95 backdrop-blur-sm border-pressed-cotton">
+        <div class="flex flex-wrap items-center justify-between gap-4 px-6 py-5 mx-auto max-w-5xl sm:px-12 sm:py-6">
+            <a href="/" class="shrink-0">
+                <Logo />
+            </a>
+            <ul class="flex flex-wrap items-center gap-x-1 gap-y-1 sm:gap-x-2">
+                {
+                    navItems.map((item) => (
+                        <li>
+                            <a href={item.href} class="inline-block px-2 py-1 no-underline sm:px-3 sm:py-2 text-sm text-graphite hover:text-gold transition-colors">
+                                {item.linkText}
+                            </a>
+                        </li>
+                    ))
+                }
                 <li>
-                    <a href={item.href} class="inline-block px-2 py-1 no-underline sm:px-3 sm:py-2 text-sm text-graphite hover:text-gold transition-colors">
-                        {item.linkText}
-                    </a>
+                    <details class="relative ml-2 group">
+                        <summary class="btn cursor-pointer list-none marker:content-none">Te ayudamos</summary>
+                        <div class="absolute right-0 z-10 flex flex-col min-w-[190px] gap-1 p-2 mt-2 border rounded-2xl bg-parchment border-pressed-cotton shadow-lg">
+                            <a
+                                href="tel:+34613959332"
+                                class="px-3 py-2 text-sm text-left no-underline rounded-xl text-graphite hover:bg-linen"
+                            >
+                                📞 Llamar · 613 95 93 32
+                            </a>
+                            <a
+                                href={whatsappHref}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="px-3 py-2 text-sm text-left no-underline rounded-xl text-graphite hover:bg-linen"
+                            >
+                                💬 Escribir por WhatsApp
+                            </a>
+                        </div>
+                    </details>
                 </li>
-            ))
-        }
-        <li>
-            <details class="relative ml-2 group">
-                <summary class="btn cursor-pointer list-none marker:content-none">Te ayudamos</summary>
-                <div class="absolute right-0 z-10 flex flex-col min-w-[190px] gap-1 p-2 mt-2 border rounded-2xl bg-parchment border-pressed-cotton shadow-lg">
-                    <a
-                        href="tel:+34613959332"
-                        class="px-3 py-2 text-sm text-left no-underline rounded-xl text-graphite hover:bg-linen"
-                    >
-                        📞 Llamar · 613 95 93 32
-                    </a>
-                    <a
-                        href={whatsappHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="px-3 py-2 text-sm text-left no-underline rounded-xl text-graphite hover:bg-linen"
-                    >
-                        💬 Escribir por WhatsApp
-                    </a>
-                </div>
-            </details>
-        </li>
-    </ul>
+            </ul>
+        </div>
+    </div>
 </nav>

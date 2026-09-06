@@ -57,6 +57,9 @@
 @layer base {
     body {
         @apply bg-parchment text-graphite;
+        /* Los elementos "full-bleed" pueden sobrar 1-2px por el ancho de la
+           barra de scroll — se recorta en vez de generar scroll horizontal. */
+        overflow-x: hidden;
     }
 
     h1,
@@ -161,5 +164,15 @@
     .eyebrow {
         @apply font-sans text-sm uppercase text-gold;
         letter-spacing: var(--tracking-caption);
+    }
+
+    /* Escapa del contenedor centrado para ocupar todo el ancho de la
+       ventana (usado por la barra de navegación y el slideshow).
+       Fórmula clásica basada solo en margin (sin "position"), para que
+       funcione igual dentro de elementos "sticky" o "relative" sin que
+       ambos "position" entren en conflicto. */
+    .full-bleed {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
     }
 }
