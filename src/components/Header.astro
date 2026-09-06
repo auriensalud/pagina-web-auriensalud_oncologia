@@ -18,7 +18,10 @@ const navItems = [
                 {
                     navItems.map((item) => (
                         <li>
-                            <a href={item.href} class="inline-block px-2 py-1 no-underline sm:px-3 sm:py-2 text-sm text-graphite hover:text-gold transition-colors">
+                            <a
+                                href={item.href}
+                                class="relative inline-block px-2 py-1 text-base font-medium no-underline transition-colors sm:px-3 sm:py-2 text-graphite hover:text-gold after:absolute after:inset-x-2 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:after:scale-x-100 sm:after:inset-x-3"
+                            >
                                 {item.linkText}
                             </a>
                         </li>
