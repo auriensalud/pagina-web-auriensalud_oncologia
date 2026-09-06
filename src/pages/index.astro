@@ -6,6 +6,12 @@ import pasillo from '../assets/pasillo-aurien-salud.jpg';
 import terapeutaLuis from '../assets/terapeuta-luis.jpg';
 import consulta from '../assets/consulta-aurien-salud.jpg';
 import logoPared from '../assets/logo-pared-aurien.jpg';
+import valoracion from '../assets/valoracion-composicion-corporal.jpg';
+import stockConsulta from '../assets/stock-consulta.jpg';
+import stockFisioterapia from '../assets/stock-fisioterapia.jpg';
+import stockNutricion from '../assets/stock-nutricion.jpg';
+import stockPsicologia from '../assets/stock-psicologia.jpg';
+import stockContinuas from '../assets/stock-continuas.jpg';
 
 const especialidades = ['Oncología', 'Fisioterapia', 'Nutrición', 'Psicología'];
 
@@ -19,13 +25,38 @@ const especialidadIconos: Record<string, string> = {
 };
 
 const equipoBloques = [
-    { titulo: 'Oncología', sub: 'Valoración clínica', icono: especialidadIconos['Oncología'] },
-    { titulo: 'Fisioterapia + Ejercicio', sub: 'Capacidad física', icono: especialidadIconos['Fisioterapia'] },
-    { titulo: 'Nutrición', sub: 'Alimentación y composición corporal', icono: especialidadIconos['Nutrición'] },
-    { titulo: 'Psicología', sub: 'Bienestar emocional', icono: especialidadIconos['Psicología'] }
+    { titulo: 'Oncología', sub: 'Estudiamos tu caso', icono: especialidadIconos['Oncología'] },
+    { titulo: 'Fisioterapia', sub: 'Ejercicio personalizado', icono: especialidadIconos['Fisioterapia'] },
+    { titulo: 'Nutrición', sub: 'Nutrición adaptada', icono: especialidadIconos['Nutrición'] },
+    { titulo: 'Psicología', sub: 'Acompañamiento psicológico', icono: especialidadIconos['Psicología'] }
 ];
 
-const caminoPasos = ['Te valoramos', 'Empiezas a moverte', 'Recuperas capacidad', 'Ganas confianza'];
+const caminoPasos = [
+    {
+        // Sin texto: la especialidad ya queda identificada en el bloque
+        // "Equipo" justo encima — aquí la foto habla sola.
+        src: stockConsulta,
+        alt: 'Consulta médica (oncología) — foto de referencia de banco de imágenes'
+    },
+    {
+        src: stockFisioterapia,
+        alt: 'Sesión de fisioterapia y ejercicio guiado — foto de referencia de banco de imágenes'
+    },
+    {
+        src: stockNutricion,
+        alt: 'Consulta con nutricionista — foto de referencia de banco de imágenes'
+    },
+    {
+        src: stockPsicologia,
+        alt: 'Sesión con psicólogo — foto de referencia de banco de imágenes'
+    },
+    {
+        texto: 'Recuperando tu vida',
+        sub: 'Un mismo equipo, un mismo camino',
+        src: stockContinuas,
+        alt: 'Persona recuperando su vida activa — foto de referencia de banco de imágenes'
+    }
+];
 
 const preguntasCarrusel = ['¿Puedo hacer ejercicio?', '¿Cómo recupero mi fuerza?', '¿Por dónde empiezo?'];
 
@@ -70,39 +101,31 @@ const slideshow = [
             }
         </div>
 
-        <section>
-            <h1 class="mb-2">El tratamiento termina.</h1>
-            <p class="mb-4 font-display text-4xl text-gold sm:text-5xl">Tu recuperación continúa.</p>
-            <p class="inline-block px-4 py-2 mb-6 text-xs text-center eyebrow bg-linen rounded-2xl sm:text-sm">
-                Primer centro sanitario en ejercicio oncológico en Ourense
-            </p>
-            <p class="max-w-xl mb-6 text-lg text-slate">
-                Te ayudamos a recuperar <strong class="font-semibold text-graphite">fuerza, confianza y autonomía</strong> para volver a una
-                vida activa.
-            </p>
-            <p class="mb-8 eyebrow">{especialidades.join(' · ')}</p>
-            <a href="#contacto" class="btn btn-md">Quiero empezar</a>
-        </section>
-
         <!-- ============================================================
-             BLOQUE 01 · ¿Y AHORA QUÉ?
-             Sin fotografía, tipografía grande, mucho espacio en blanco.
+             HERO + ¿Y AHORA QUÉ? (unificados)
+             "El tratamiento termina" da paso directamente a las preguntas
+             que se van intercambiando, y estas resuelven en "Tu
+             recuperación continúa" — todo en un único bloque centrado.
         ============================================================= -->
-        <section id="ahora-que" class="max-w-3xl">
-            <p class="mb-2 eyebrow">El tratamiento termina...</p>
-            <h2 class="mb-10">¿Y ahora qué?</h2>
-            <div class="relative min-h-[140px] mb-12 sm:min-h-[110px] qa-carousel">
+        <section id="ahora-que" class="text-center">
+            <h1 class="mb-8">El tratamiento termina.</h1>
+            <div class="relative max-w-2xl min-h-[110px] mx-auto mb-8 sm:min-h-[90px] qa-carousel">
                 {
                     preguntasCarrusel.map((pregunta, i) => (
                         <p class:list={['absolute inset-0 font-display text-3xl text-graphite sm:text-4xl qa-slide', `qa-slide-${i + 1}`]}>{pregunta}</p>
                     ))
                 }
             </div>
-            <p class="mb-2 text-sm eyebrow">La solución</p>
-            <p class="text-lg text-slate">
-                No es un gimnasio.<br />
-                Es un espacio sanitario donde aprender a <strong class="font-semibold text-graphite">volver a moverte con seguridad</strong>.
+            <p class="inline-block px-6 py-3 mb-6 font-display text-3xl text-gold bg-linen rounded-full sm:text-4xl">Tu recuperación continúa.</p>
+            <p class="inline-block px-4 py-2 mb-6 text-xs eyebrow bg-linen rounded-2xl sm:text-sm">
+                Primer centro sanitario en ejercicio oncológico en Ourense
             </p>
+            <p class="max-w-xl mx-auto mb-6 text-lg text-slate">
+                Te ayudamos a recuperar <strong class="font-semibold text-graphite">fuerza, confianza y autonomía</strong> para volver a una
+                vida activa.
+            </p>
+            <p class="mb-8 eyebrow">{especialidades.join(' · ')}</p>
+            <a href="#contacto" class="btn btn-md">Quiero empezar</a>
         </section>
 
         <!-- ============================================================
@@ -112,8 +135,13 @@ const slideshow = [
              narrativo: el equipo, y el camino que recorre contigo.
         ============================================================= -->
         <section id="equipo">
-            <h2 class="mb-2">No tienes que hacerlo solo.</h2>
-            <p class="mb-12 text-lg text-slate">Un equipo para acompañarte.</p>
+            <h2 class="mb-2 text-gold">No tienes que hacerlo solo.</h2>
+            <p class="mb-10 text-lg text-center text-slate">Un equipo para acompañarte hacia una misma dirección.</p>
+            <div class="relative hidden h-px mb-12 sm:block bg-pressed-cotton">
+                <span class="absolute flex items-center justify-center w-16 h-16 -translate-x-1/2 -translate-y-1/2 rounded-full left-1/2 top-1/2 bg-gold font-display text-graphite">
+                    Tú
+                </span>
+            </div>
             <div class="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6">
                 {
                     equipoBloques.map((item) => (
@@ -129,34 +157,42 @@ const slideshow = [
                     ))
                 }
             </div>
-            <div class="relative hidden h-px mt-12 sm:block bg-pressed-cotton">
-                <span class="absolute flex items-center justify-center w-16 h-16 -translate-x-1/2 -translate-y-1/2 rounded-full left-1/2 top-1/2 bg-gold font-display text-graphite">
-                    Tú
-                </span>
-            </div>
-            <p class="mt-16 text-lg text-center text-slate sm:mt-10">Un equipo. Una misma dirección: tú.</p>
 
-            <!-- El camino: principal recurso gráfico de la web. Recorrido
-                 horizontal en desktop, vertical en móvil, con activación
-                 progresiva al hacer scroll. -->
+            <!-- El camino: principal recurso gráfico de la web. Carrusel de
+                 fotos de banco, una por especialidad y en el mismo orden que
+                 el grid de "Equipo" justo encima (sin repetir el nombre de
+                 la especialidad como texto, ya que ahí queda implícito),
+                 + un cierre de "vida recuperada" con su propio mensaje.
+                 Mismo carrusel y mismo tratamiento visual para las 5, de
+                 forma que se vea un único recorrido y no fotos sueltas.
+                 Fotos de referencia de banco libre, marcadas en el alt, a
+                 sustituir cuando tengáis fotos reales propias. -->
             <div id="camino" class="pt-16 mt-16 border-t sm:pt-20 sm:mt-20 border-pressed-cotton">
-                <h2 class="mb-16 max-w-2xl">Del tratamiento a tu vida.</h2>
-                <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-3">
+                <h2 class="mb-10 max-w-2xl text-gold">El camino hacia tu mejor versión.</h2>
+                <div class="relative overflow-hidden rounded-3xl aspect-3/2 sm:aspect-2/1 camino-carousel">
                     {
                         caminoPasos.map((paso, i) => (
-                            <>
-                                <p class="min-w-0 reveal font-display text-2xl text-graphite sm:flex-1 sm:text-xl">{paso}</p>
-                                <span class="text-2xl text-gold rotate-90 shrink-0 sm:rotate-0" aria-hidden="true">→</span>
-                            </>
+                            <div class:list={['absolute inset-0 camino-slide', `camino-slide-${i + 1}`]}>
+                                <Image
+                                    src={paso.src}
+                                    alt={paso.alt}
+                                    class="absolute inset-0 object-cover w-full h-full"
+                                    widths={[640, 1024, 1600]}
+                                    sizes="(max-width: 1024px) 100vw, 768px"
+                                />
+                                {paso.texto && (
+                                    <>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-graphite/80 via-graphite/10 to-transparent" aria-hidden="true" />
+                                        <div class="absolute bottom-6 left-6 right-6">
+                                            <p class="eyebrow text-white/80">{paso.sub}</p>
+                                            <p class="font-display text-2xl text-white sm:text-3xl">{paso.texto}</p>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
                         ))
                     }
-                    <p class="min-w-0 reveal font-display text-3xl text-gold sm:flex-1 sm:text-2xl">Continúas</p>
                 </div>
-                <p class="max-w-sm mt-10 text-slate">
-                    En tu gimnasio.<br />
-                    En tu deporte.<br />
-                    En tu día a día.
-                </p>
             </div>
         </section>
 
@@ -266,33 +302,44 @@ const slideshow = [
                 margin-bottom: 0.75rem;
             }
         }
-    </style>
 
-    <script>
-        // Revelado progresivo al hacer scroll (bloques "¿Y ahora qué?" y "El camino").
-        // Si JS no llega a correr, los elementos se quedan visibles por defecto:
-        // solo los ocultamos si vamos a poder animarlos de vuelta.
-        const els = document.querySelectorAll<HTMLElement>('.reveal');
-        if ('IntersectionObserver' in window && els.length) {
-            els.forEach((el) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(12px)';
-                el.style.transition = 'opacity .6s ease, transform .6s ease';
-            });
-            const io = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            const el = entry.target as HTMLElement;
-                            el.style.opacity = '1';
-                            el.style.transform = 'none';
-                            io.unobserve(el);
-                        }
-                    });
-                },
-                { threshold: 0.2 }
-            );
-            els.forEach((el) => io.observe(el));
+        /* Carrusel de fotos de "El camino" */
+        .camino-slide {
+            opacity: 0;
+            animation: camino-fade 20s infinite;
+            animation-timing-function: ease-in-out;
         }
-    </script>
+        .camino-slide-1 {
+            animation-delay: 0s;
+        }
+        .camino-slide-2 {
+            animation-delay: -4s;
+        }
+        .camino-slide-3 {
+            animation-delay: -8s;
+        }
+        .camino-slide-4 {
+            animation-delay: -12s;
+        }
+        .camino-slide-5 {
+            animation-delay: -16s;
+        }
+        @keyframes camino-fade {
+            0%, 17% { opacity: 1; }
+            20%, 97% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .camino-slide {
+                animation: none;
+                opacity: 1;
+            }
+            .camino-slide-2,
+            .camino-slide-3,
+            .camino-slide-4,
+            .camino-slide-5 {
+                display: none;
+            }
+        }
+    </style>
 </Layout>
