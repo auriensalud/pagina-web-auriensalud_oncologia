@@ -33,20 +33,25 @@ const equipoBloques = [
 
 const caminoPasos = [
     {
-        // Sin texto: la especialidad ya queda identificada en el bloque
-        // "Equipo" justo encima — aquí la foto habla sola.
+        // Frase-acción en vez del nombre de la especialidad (esa ya
+        // queda identificada en el bloque "Equipo" justo encima) —
+        // las 5 frases forman una secuencia lógica de principio a fin.
+        texto: 'Estudiamos tu caso',
         src: stockConsulta,
         alt: 'Consulta médica (oncología) — foto de referencia de banco de imágenes'
     },
     {
+        texto: 'Ejercicio personalizado',
         src: stockFisioterapia,
         alt: 'Sesión de fisioterapia y ejercicio guiado — foto de referencia de banco de imágenes'
     },
     {
+        texto: 'Nutrición adaptada',
         src: stockNutricion,
         alt: 'Consulta con nutricionista — foto de referencia de banco de imágenes'
     },
     {
+        texto: 'Escuchamos y te acompañamos',
         src: stockPsicologia,
         alt: 'Sesión con psicólogo — foto de referencia de banco de imágenes'
     },
@@ -107,7 +112,7 @@ const slideshow = [
              que se van intercambiando, y estas resuelven en "Tu
              recuperación continúa" — todo en un único bloque centrado.
         ============================================================= -->
-        <section id="ahora-que" class="text-center">
+        <section id="ahora-que" class="text-center scroll-mt-32 sm:scroll-mt-40">
             <h1 class="mb-8">El tratamiento termina.</h1>
             <div class="relative max-w-2xl min-h-[110px] mx-auto mb-8 sm:min-h-[90px] qa-carousel">
                 {
@@ -134,7 +139,7 @@ const slideshow = [
              después el recorrido que hacéis juntos. Un solo bloque
              narrativo: el equipo, y el camino que recorre contigo.
         ============================================================= -->
-        <section id="equipo">
+        <section id="equipo" class="scroll-mt-32 sm:scroll-mt-40">
             <h2 class="mb-2 text-gold">No tienes que hacerlo solo.</h2>
             <p class="mb-10 text-lg text-center text-slate">Un equipo para acompañarte hacia una misma dirección.</p>
             <div class="relative hidden h-px mb-12 sm:block bg-pressed-cotton">
@@ -160,14 +165,16 @@ const slideshow = [
 
             <!-- El camino: principal recurso gráfico de la web. Carrusel de
                  fotos de banco, una por especialidad y en el mismo orden que
-                 el grid de "Equipo" justo encima (sin repetir el nombre de
-                 la especialidad como texto, ya que ahí queda implícito),
-                 + un cierre de "vida recuperada" con su propio mensaje.
-                 Mismo carrusel y mismo tratamiento visual para las 5, de
-                 forma que se vea un único recorrido y no fotos sueltas.
-                 Fotos de referencia de banco libre, marcadas en el alt, a
-                 sustituir cuando tengáis fotos reales propias. -->
-            <div id="camino" class="pt-16 mt-16 border-t sm:pt-20 sm:mt-20 border-pressed-cotton">
+                 el grid de "Equipo" justo encima. Cada foto lleva una frase
+                 de acción (no el nombre de la especialidad, que ya queda
+                 identificado arriba) formando una secuencia lógica: te
+                 estudiamos → te movemos → te alimentamos → te escuchamos →
+                 recuperas tu vida. Mismo carrusel y mismo tratamiento
+                 visual para las 5, de forma que se vea un único recorrido
+                 y no fotos sueltas. Fotos de referencia de banco libre,
+                 marcadas en el alt, a sustituir cuando tengáis fotos reales
+                 propias. -->
+            <div id="camino" class="pt-16 mt-16 border-t sm:pt-20 sm:mt-20 border-pressed-cotton scroll-mt-32 sm:scroll-mt-40">
                 <h2 class="mb-10 max-w-2xl text-gold">El camino hacia tu mejor versión.</h2>
                 <div class="relative overflow-hidden rounded-3xl aspect-3/2 sm:aspect-2/1 camino-carousel">
                     {
@@ -184,7 +191,7 @@ const slideshow = [
                                     <>
                                         <div class="absolute inset-0 bg-gradient-to-t from-graphite/80 via-graphite/10 to-transparent" aria-hidden="true" />
                                         <div class="absolute bottom-6 left-6 right-6">
-                                            <p class="eyebrow text-white/80">{paso.sub}</p>
+                                            {paso.sub && <p class="eyebrow text-white/80">{paso.sub}</p>}
                                             <p class="font-display text-2xl text-white sm:text-3xl">{paso.texto}</p>
                                         </div>
                                     </>
@@ -219,7 +226,7 @@ const slideshow = [
         <!-- ============================================================
              CTA FINAL
         ============================================================= -->
-        <section id="contacto" class="p-10 text-center bg-graphite rounded-3xl sm:p-20">
+        <section id="contacto" class="p-10 text-center bg-graphite rounded-3xl sm:p-20 scroll-mt-32 sm:scroll-mt-40">
             <h2 class="max-w-lg mx-auto mb-4 text-parchment">¿Empezamos?</h2>
             <p class="max-w-md mx-auto mb-8 text-lg text-pressed-cotton">
                 El primer paso es conocer <strong class="font-semibold text-white">desde dónde partes</strong>.
