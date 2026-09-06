@@ -106,9 +106,10 @@ const slideshow = [
         </section>
 
         <!-- ============================================================
-             BLOQUE 02 · EQUIPO
-             4 iconos lineales convergiendo hacia un elemento central: TÚ.
-             Desktop: en línea. Móvil: 2x2.
+             BLOQUE 02+03 · EQUIPO + EL CAMINO (unificados)
+             Primero quién te acompaña (4 iconos convergiendo hacia TÚ),
+             después el recorrido que hacéis juntos. Un solo bloque
+             narrativo: el equipo, y el camino que recorre contigo.
         ============================================================= -->
         <section id="equipo">
             <h2 class="mb-2">No tienes que hacerlo solo.</h2>
@@ -134,32 +135,29 @@ const slideshow = [
                 </span>
             </div>
             <p class="mt-16 text-lg text-center text-slate sm:mt-10">Un equipo. Una misma dirección: tú.</p>
-        </section>
 
-        <!-- ============================================================
-             BLOQUE 03 · EL CAMINO
-             Principal recurso gráfico de la web: recorrido horizontal en
-             desktop, vertical en móvil, con activación progresiva al
-             hacer scroll.
-        ============================================================= -->
-        <section id="camino">
-            <h2 class="mb-16 max-w-2xl">Del tratamiento a tu vida.</h2>
-            <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-3">
-                {
-                    caminoPasos.map((paso, i) => (
-                        <>
-                            <p class="min-w-0 reveal font-display text-2xl text-graphite sm:flex-1 sm:text-xl">{paso}</p>
-                            <span class="text-2xl text-gold rotate-90 shrink-0 sm:rotate-0" aria-hidden="true">→</span>
-                        </>
-                    ))
-                }
-                <p class="min-w-0 reveal font-display text-3xl text-gold sm:flex-1 sm:text-2xl">Continúas</p>
+            <!-- El camino: principal recurso gráfico de la web. Recorrido
+                 horizontal en desktop, vertical en móvil, con activación
+                 progresiva al hacer scroll. -->
+            <div id="camino" class="pt-16 mt-16 border-t sm:pt-20 sm:mt-20 border-pressed-cotton">
+                <h2 class="mb-16 max-w-2xl">Del tratamiento a tu vida.</h2>
+                <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-3">
+                    {
+                        caminoPasos.map((paso, i) => (
+                            <>
+                                <p class="min-w-0 reveal font-display text-2xl text-graphite sm:flex-1 sm:text-xl">{paso}</p>
+                                <span class="text-2xl text-gold rotate-90 shrink-0 sm:rotate-0" aria-hidden="true">→</span>
+                            </>
+                        ))
+                    }
+                    <p class="min-w-0 reveal font-display text-3xl text-gold sm:flex-1 sm:text-2xl">Continúas</p>
+                </div>
+                <p class="max-w-sm mt-10 text-slate">
+                    En tu gimnasio.<br />
+                    En tu deporte.<br />
+                    En tu día a día.
+                </p>
             </div>
-            <p class="max-w-sm mt-10 text-slate">
-                En tu gimnasio.<br />
-                En tu deporte.<br />
-                En tu día a día.
-            </p>
         </section>
 
         <!-- ============================================================
