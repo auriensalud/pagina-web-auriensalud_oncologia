@@ -6,7 +6,6 @@ import pasillo from '../assets/pasillo-aurien-salud.jpg';
 import terapeutaLuis from '../assets/terapeuta-luis.jpg';
 import consulta from '../assets/consulta-aurien-salud.jpg';
 import logoPared from '../assets/logo-pared-aurien.jpg';
-import valoracion from '../assets/valoracion-composicion-corporal.jpg';
 
 const especialidades = ['Oncología', 'Fisioterapia', 'Nutrición', 'Psicología'];
 
@@ -19,49 +18,14 @@ const especialidadIconos: Record<string, string> = {
     Psicología: 'M9 3a5 5 0 0 0-5 5c0 2 1 3 1 5 0 2-1 3-1 5a2 2 0 0 0 2 2h1v-3M9 3a5 5 0 0 1 5 5c0 1-.5 2-1 3M14 8h4M13 12h4'
 };
 
-const servicios = [
-    {
-        paso: '01',
-        titulo: 'Control',
-        descripcion:
-            'Valoración inicial multidisciplinar con oncología, fisioterapia, psicología y nutrición. Un punto de partida seguro: qué puedes y qué no puedes hacer ahora mismo, sin genéricos.'
-    },
-    {
-        paso: '02',
-        titulo: 'Cuidado',
-        descripcion:
-            'Programa de ejercicio guiado y acompañamiento continuo, ajustado a tu energía y a tu momento. A tu ritmo, nunca al de un grupo.'
-    },
-    {
-        paso: '03',
-        titulo: 'Prevención',
-        descripcion:
-            'Mantenimiento a largo plazo: recuperar tus rutinas, tu vida social y prevenir recaídas funcionales. El camino de vuelta a ser tú misma.'
-    }
+const equipoBloques = [
+    { titulo: 'Oncología', sub: 'Valoración clínica', icono: especialidadIconos['Oncología'] },
+    { titulo: 'Fisioterapia + Ejercicio', sub: 'Capacidad física', icono: especialidadIconos['Fisioterapia'] },
+    { titulo: 'Nutrición', sub: 'Alimentación y composición corporal', icono: especialidadIconos['Nutrición'] },
+    { titulo: 'Psicología', sub: 'Bienestar emocional', icono: especialidadIconos['Psicología'] }
 ];
 
-const preguntas = [
-    {
-        pregunta: '¿Puedo empezar si acabo de terminar el tratamiento?',
-        respuesta:
-            'Sí, es precisamente el momento para el que está pensado el programa: recuperar fuerza, rutina y energía una vez termina la fase más dura del tratamiento.'
-    },
-    {
-        pregunta: '¿Y si nunca he hecho ejercicio antes?',
-        respuesta:
-            'No pasa nada. El punto de partida es tu valoración inicial, no la de nadie más — el programa se adapta a ti, no al revés.'
-    },
-    {
-        pregunta: '¿Y si todavía no me siento con fuerzas?',
-        respuesta:
-            'Lo hablamos en la primera valoración. Ir a tu ritmo también significa poder empezar más despacio, o esperar un poco más si hace falta.'
-    },
-    {
-        pregunta: '¿Cuál es el primer paso?',
-        respuesta:
-            'Pedir tu primera valoración, por teléfono o WhatsApp. Es una conversación, no un compromiso — para ver juntos si esto es para ti.'
-    }
-];
+const caminoPasos = ['Te valoramos', 'Empiezas a moverte', 'Recuperas capacidad', 'Ganas confianza'];
 
 const whatsappHref =
     'https://wa.me/34613959332?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20una%20primera%20valoraci%C3%B3n%20para%20el%20programa%20de%20Salud%20Onco-Metab%C3%B3lica.';
@@ -79,11 +43,14 @@ const slideshow = [
 ];
 ---
 
-<Layout title="Salud Onco-Metabólica — Aurien Salud">
-    <div class="flex flex-col gap-24 sm:gap-32">
-        <!-- Franja horizontal a pantalla completa bajo el menú: slideshow con fondo desenfocado
-             (para rellenar la caja) + la foto completa sin recortar encima, para no perder nada
-             de imagen sea cual sea su forma (la mayoría de las fotos reales son verticales). -->
+<Layout title="Aurien Onco-Metabólico">
+    <div class="flex flex-col gap-28 sm:gap-40">
+        <!-- ============================================================
+             HERO / PORTADA
+             Slideshow a pantalla completa (transición lenta entre escenas
+             reales: entrada, pasillo, acompañamiento, logo). CTA visible
+             sin hacer scroll.
+        ============================================================= -->
         <div class="relative overflow-hidden full-bleed aspect-3/2 sm:aspect-2/1 kenburns-slideshow">
             {
                 slideshow.map((photo, i) => (
@@ -101,223 +68,199 @@ const slideshow = [
             }
         </div>
 
-        <style>
-            .full-bleed {
-                width: 100vw;
-                left: 50%;
-                margin-left: -50vw;
-            }
-            .kenburns-slideshow .slide {
-                opacity: 0;
-                animation: kenburns-fade 40s infinite;
-                animation-timing-function: ease-in-out;
-            }
-            .kenburns-slideshow .slide-1 {
-                animation-delay: 0s;
-            }
-            .kenburns-slideshow .slide-2 {
-                animation-delay: -8s;
-            }
-            .kenburns-slideshow .slide-3 {
-                animation-delay: -16s;
-            }
-            .kenburns-slideshow .slide-4 {
-                animation-delay: -24s;
-            }
-            .kenburns-slideshow .slide-5 {
-                animation-delay: -32s;
-            }
-            @keyframes kenburns-fade {
-                0%, 17% { opacity: 1; }
-                20%, 97% { opacity: 0; }
-                100% { opacity: 1; }
-            }
-            @media (prefers-reduced-motion: reduce) {
-                .kenburns-slideshow .slide {
-                    animation: none;
-                    opacity: 1;
-                }
-                .kenburns-slideshow .slide-2,
-                .kenburns-slideshow .slide-3,
-                .kenburns-slideshow .slide-4,
-                .kenburns-slideshow .slide-5 {
-                    display: none;
-                }
-            }
-        </style>
-
-        <!-- Hero -->
         <section>
-            <h1 class="max-w-3xl mb-6">Quieres recuperar tu mejor versión</h1>
-            <details class="flex flex-col items-center mb-8 group">
-                <summary class="btn btn-md list-none marker:content-none">Esto te interesa</summary>
-                <div class="mt-4 text-center">
-                    <p class="mb-2 font-display text-2xl">Atención oncológica integral</p>
-                    <ul class="flex flex-wrap justify-center gap-x-5 gap-y-1">
-                        {
-                            especialidades.map((especialidad) => (
-                                <li class="text-sm text-slate">{especialidad}</li>
-                            ))
-                        }
-                    </ul>
-                </div>
-            </details>
-            <div class="flex flex-wrap items-center gap-4">
-                <a href="#contacto" class="btn btn-md">Pide tu primera valoración</a>
-                <a href={whatsappHref} class="btn-ghost btn-md" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
-            </div>
-        </section>
-
-        <!-- Quiénes somos -->
-        <section id="quienes-somos">
-            <div class="grid gap-10 mb-12 sm:grid-cols-2 sm:gap-16">
-                <div>
-                    <p class="eyebrow mb-4">Onco-Metabólico</p>
-                    <h2 class="mb-6">El ejercicio también forma parte de tu recuperación.</h2>
-                </div>
-                <div class="flex flex-col justify-center gap-4 text-slate">
-                    <p>
-                        Somos un equipo pionero en Ourense que entiende el ejercicio como una herramienta para cuidar tu salud, recuperar tu
-                        confianza y mejorar tu calidad de vida.
-                    </p>
-                </div>
-            </div>
-            <div class="grid gap-8 mb-12 sm:grid-cols-2 sm:gap-16">
-                <div>
-                    <h3 class="mb-3">Empezar de forma segura</h3>
-                    <p class="text-sm text-slate">
-                        Después de un proceso oncológico o ante una situación metabólica, volver a hacer ejercicio puede generar dudas. No
-                        tienes que hacerlo solo. Te acompañamos para que empieces de forma segura, progresiva y adaptada a ti.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="mb-3">No somos un gimnasio</h3>
-                    <p class="text-sm text-slate">
-                        Tampoco queremos que dependas de nosotros para siempre. Queremos que este sea el comienzo de un camino: aprender a
-                        entrenar, recuperar confianza en tu cuerpo y conseguir que el ejercicio forme parte de tu vida.
-                    </p>
-                </div>
-            </div>
-            <div class="flex flex-col items-center gap-6 text-center">
-                <p class="eyebrow">Empezar acompañado · Aprender · Recuperar · Seguir por ti mismo</p>
-                <p class="font-display text-2xl text-graphite sm:text-3xl">Un nuevo paradigma para tu recuperación.</p>
-            </div>
-        </section>
-
-        <!-- Programa / Servicios -->
-        <section id="programa">
-            <p class="eyebrow mb-4">El programa</p>
-            <h2 class="max-w-2xl mb-4">Control, Cuidado y Prevención.</h2>
-            <p class="max-w-xl mb-12 text-lg text-slate">
-                La misma metodología que ya usamos en Recupera tu Corazón o Respira Mejor, adaptada a la recuperación metabólica y funcional tras
-                un tratamiento oncológico.
+            <h1 class="mb-2">El tratamiento termina.</h1>
+            <p class="mb-6 font-display text-4xl text-gold sm:text-5xl">Tu recuperación continúa.</p>
+            <p class="max-w-xl mb-6 text-lg text-slate">
+                Te ayudamos a recuperar <strong class="font-semibold text-graphite">fuerza, confianza y autonomía</strong> para volver a una
+                vida activa.
             </p>
-            <div class="grid gap-8 sm:grid-cols-3 sm:gap-6">
-                {
-                    servicios.map((servicio) => (
-                        <div class="overflow-hidden bg-linen rounded-md">
-                            {servicio.titulo === 'Control' && (
-                                <Image src={valoracion} alt="Valoración de composición corporal en Aurien Salud" class="object-cover w-full h-40" widths={[400, 600]} sizes="400px" />
-                            )}
-                            <div class="p-8">
-                                <p class="mb-4 font-display text-3xl text-gold">{servicio.paso}</p>
-                                <h3 class="mb-3">{servicio.titulo}</h3>
-                                <p class="text-sm text-slate">{servicio.descripcion}</p>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
+            <p class="mb-8 eyebrow">{especialidades.join(' · ')}</p>
+            <a href="#contacto" class="btn btn-md">Quiero empezar</a>
         </section>
 
-        <!-- Por qué el ejercicio importa -->
-        <section class="grid gap-10 sm:grid-cols-2 sm:gap-16">
-            <div>
-                <p class="eyebrow mb-4">Por qué</p>
-                <h2 class="mb-6">El ejercicio no es un extra, es parte del tratamiento.</h2>
+        <!-- ============================================================
+             BLOQUE 01 · ¿Y AHORA QUÉ?
+             Sin fotografía, tipografía grande, mucho espacio en blanco.
+        ============================================================= -->
+        <section id="ahora-que" class="max-w-3xl">
+            <h2 class="mb-10">¿Y ahora qué?</h2>
+            <div class="flex flex-col gap-4 mb-12">
+                <p class="reveal font-display text-3xl text-graphite sm:text-4xl">¿Puedo hacer ejercicio?</p>
+                <p class="reveal font-display text-3xl text-graphite sm:text-4xl">¿Cómo recupero mi fuerza?</p>
+                <p class="reveal font-display text-3xl text-graphite sm:text-4xl">¿Por dónde empiezo?</p>
             </div>
-            <div class="flex flex-col gap-4 text-slate">
-                <p>
-                    Las principales guías clínicas de oncología recogen el ejercicio supervisado como un pilar más del tratamiento, no como un
-                    complemento aparte.
-                </p>
-                <p>
-                    Ayuda a conservar fuerza y masa muscular, a tolerar mejor las fases más duras y a recuperar antes la energía y la autonomía
-                    del día a día — siempre adaptado a tu momento y supervisado por profesionales sanitarios.
-                </p>
-            </div>
+            <p class="text-lg text-slate">
+                No es un gimnasio.<br />
+                Es un espacio sanitario donde aprender a <strong class="font-semibold text-graphite">volver a moverte con seguridad</strong>.
+            </p>
         </section>
 
-        <!-- Valores -->
-        <section class="p-10 bg-linen rounded-md sm:p-16">
-            <p class="eyebrow mb-4">Cómo trabajamos</p>
-            <div class="grid gap-8 sm:grid-cols-2">
-                <div>
-                    <h3 class="mb-2">Casa, seguro, tranquilidad</h3>
-                    <p class="text-sm text-slate">Los mismos tres pilares de Aurien Salud, que aquí encajan mejor que en ningún otro programa.</p>
-                </div>
-                <div>
-                    <h3 class="mb-2">Acompañamiento real</h3>
-                    <p class="text-sm text-slate">No tienes que decidir esto sola. No prometemos victorias, prometemos estar cerca.</p>
-                </div>
-                <div>
-                    <h3 class="mb-2">Tu ritmo, no el de un grupo</h3>
-                    <p class="text-sm text-slate">Nadie se compara ni se exige al nivel de otra paciente.</p>
-                </div>
-                <div>
-                    <h3 class="mb-2">Seguridad clínica primero</h3>
-                    <p class="text-sm text-slate">Por delante de cualquier objetivo estético o de rendimiento.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Especialidades -->
+        <!-- ============================================================
+             BLOQUE 02 · EQUIPO
+             4 iconos lineales convergiendo hacia un elemento central: TÚ.
+             Desktop: en línea. Móvil: 2x2.
+        ============================================================= -->
         <section id="equipo">
-            <p class="eyebrow mb-4">Especialidades</p>
-            <h2 class="max-w-2xl mb-12">Un equipo, cuatro especialidades, un mismo objetivo.</h2>
-            <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <h2 class="mb-2">No tienes que hacerlo solo.</h2>
+            <p class="mb-12 text-lg text-slate">Un equipo para acompañarte.</p>
+            <div class="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6">
                 {
-                    especialidades.map((especialidad) => (
+                    equipoBloques.map((item) => (
                         <div class="text-center">
-                            <div class="flex items-center justify-center mb-3 aspect-square rounded-full bg-gold/20">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-gold">
-                                    <path d={especialidadIconos[especialidad]} />
+                            <div class="flex items-center justify-center mx-auto mb-4 rounded-full w-14 h-14 bg-gold/20">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-gold">
+                                    <path d={item.icono} />
                                 </svg>
                             </div>
-                            <p class="text-sm font-medium text-graphite">{especialidad}</p>
+                            <p class="mb-1 text-sm font-semibold tracking-wide uppercase text-graphite">{item.titulo}</p>
+                            <p class="text-sm text-slate">{item.sub}</p>
                         </div>
                     ))
                 }
             </div>
+            <div class="relative hidden h-px mt-12 sm:block bg-pressed-cotton">
+                <span class="absolute flex items-center justify-center w-16 h-16 -translate-x-1/2 -translate-y-1/2 rounded-full left-1/2 top-1/2 bg-gold font-display text-graphite">
+                    Tú
+                </span>
+            </div>
+            <p class="mt-16 text-lg text-center text-slate sm:mt-10">Un equipo. Una misma dirección: tú.</p>
         </section>
 
-        <!-- Preguntas frecuentes -->
-        <section id="faq">
-            <p class="eyebrow mb-4">Dudas frecuentes</p>
-            <h2 class="max-w-2xl mb-10">Preguntas que nos hacen antes de empezar.</h2>
-            <div class="flex flex-col max-w-2xl gap-4">
+        <!-- ============================================================
+             BLOQUE 03 · EL CAMINO
+             Principal recurso gráfico de la web: recorrido horizontal en
+             desktop, vertical en móvil, con activación progresiva al
+             hacer scroll.
+        ============================================================= -->
+        <section id="camino">
+            <h2 class="mb-16 max-w-2xl">Del tratamiento a tu vida.</h2>
+            <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-3">
                 {
-                    preguntas.map((item) => (
-                        <details class="pb-4 border-b border-pressed-cotton group">
-                            <summary class="flex items-center justify-between font-medium cursor-pointer list-none text-graphite marker:content-none">
-                                {item.pregunta}
-                                <span class="ml-4 text-gold group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
-                            </summary>
-                            <p class="mt-3 text-sm text-slate">{item.respuesta}</p>
-                        </details>
+                    caminoPasos.map((paso, i) => (
+                        <>
+                            <p class="min-w-0 reveal font-display text-2xl text-graphite sm:flex-1 sm:text-xl">{paso}</p>
+                            <span class="text-2xl text-gold rotate-90 shrink-0 sm:rotate-0" aria-hidden="true">→</span>
+                        </>
                     ))
                 }
+                <p class="min-w-0 reveal font-display text-3xl text-gold sm:flex-1 sm:text-2xl">Continúas</p>
             </div>
+            <p class="max-w-sm mt-10 text-slate">
+                En tu gimnasio.<br />
+                En tu deporte.<br />
+                En tu día a día.
+            </p>
         </section>
 
-        <!-- CTA final -->
-        <section class="p-10 text-center bg-graphite rounded-md sm:p-20">
-            <h2 class="max-w-lg mx-auto mb-4 text-parchment">No tienes que decidir esto sola.</h2>
-            <p class="max-w-md mx-auto mb-8 text-lg text-pressed-cotton">Hablemos primero.</p>
-            <div class="flex flex-wrap items-center justify-center gap-4">
-                <a href="tel:+34613959332" class="btn btn-lg">613 95 93 32</a>
+        <!-- ============================================================
+             BLOQUE 04 · CIERRE EMOCIONAL
+             [PENDIENTE DE FOTO]: aquí debería ir una foto/vídeo de vida
+             activa fuera de la clínica (caminar, bici, familia,
+             naturaleza...). No usamos ninguna porque no tenemos ese
+             material real todavía — solo fotos de la propia clínica.
+             Cuando la tengáis, sustituir este bloque de color por la
+             imagen a pantalla completa.
+        ============================================================= -->
+        <section class="p-10 text-center rounded-md bg-linen sm:p-20">
+            <h2 class="max-w-xl mx-auto mb-2">Nuestro objetivo no es que te quedes.</h2>
+            <p class="max-w-xl mx-auto mb-6 font-display text-3xl text-gold sm:text-4xl">Es que vuelvas a sentirte capaz.</p>
+            <p class="max-w-md mx-auto mb-8 text-slate">
+                Te acompañamos para que recuperes las herramientas necesarias para <strong
+                    class="font-semibold text-graphite">seguir avanzando por ti</strong>.
+            </p>
+            <p class="max-w-md mx-auto mb-8 font-medium text-graphite">Aurien es el puente entre el tratamiento y una vida activa.</p>
+            <a href="#contacto" class="btn btn-md">Quiero empezar</a>
+        </section>
+
+        <!-- ============================================================
+             CTA FINAL
+        ============================================================= -->
+        <section id="contacto" class="p-10 text-center bg-graphite rounded-md sm:p-20">
+            <h2 class="max-w-lg mx-auto mb-4 text-parchment">¿Empezamos?</h2>
+            <p class="max-w-md mx-auto mb-8 text-lg text-pressed-cotton">
+                El primer paso es conocer <strong class="font-semibold text-white">desde dónde partes</strong>.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+                <a href="tel:+34613959332" class="btn btn-lg">Pedir valoración · 613 95 93 32</a>
                 <a href={whatsappHref} class="btn-ghost" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
             </div>
+            <p class="mb-2 font-display text-xl text-parchment">Aurien Onco-Metabólico</p>
+            <p class="mb-4 text-sm eyebrow">{especialidades.join(' · ')}</p>
+            <p class="text-pressed-cotton">La puerta hacia tu recuperación.</p>
         </section>
     </div>
+
+    <style>
+        .full-bleed {
+            width: 100vw;
+            left: 50%;
+            margin-left: -50vw;
+        }
+        .kenburns-slideshow .slide {
+            opacity: 0;
+            animation: kenburns-fade 40s infinite;
+            animation-timing-function: ease-in-out;
+        }
+        .kenburns-slideshow .slide-1 {
+            animation-delay: 0s;
+        }
+        .kenburns-slideshow .slide-2 {
+            animation-delay: -8s;
+        }
+        .kenburns-slideshow .slide-3 {
+            animation-delay: -16s;
+        }
+        .kenburns-slideshow .slide-4 {
+            animation-delay: -24s;
+        }
+        .kenburns-slideshow .slide-5 {
+            animation-delay: -32s;
+        }
+        @keyframes kenburns-fade {
+            0%, 17% { opacity: 1; }
+            20%, 97% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .kenburns-slideshow .slide {
+                animation: none;
+                opacity: 1;
+            }
+            .kenburns-slideshow .slide-2,
+            .kenburns-slideshow .slide-3,
+            .kenburns-slideshow .slide-4,
+            .kenburns-slideshow .slide-5 {
+                display: none;
+            }
+        }
+    </style>
+
+    <script>
+        // Revelado progresivo al hacer scroll (bloques "¿Y ahora qué?" y "El camino").
+        // Si JS no llega a correr, los elementos se quedan visibles por defecto:
+        // solo los ocultamos si vamos a poder animarlos de vuelta.
+        const els = document.querySelectorAll<HTMLElement>('.reveal');
+        if ('IntersectionObserver' in window && els.length) {
+            els.forEach((el) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(12px)';
+                el.style.transition = 'opacity .6s ease, transform .6s ease';
+            });
+            const io = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target as HTMLElement;
+                            el.style.opacity = '1';
+                            el.style.transform = 'none';
+                            io.unobserve(el);
+                        }
+                    });
+                },
+                { threshold: 0.2 }
+            );
+            els.forEach((el) => io.observe(el));
+        }
+    </script>
 </Layout>
